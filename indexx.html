@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoológico</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Animales del Zoológico</h1>
+        <div>
+            <p id="countCage5Under3kg"></p>
+            <p id="countFelineCages2to5"></p>
+            <p id="animalNameCage4Under120"></p>
+        </div>
+    </div>
+
+    <script>
+        // Definición de la clase CZooAnimal
+        class CZooAnimal {
+            constructor(name, cageNumber, IdTypeAnimal, weight) {
+                this.IdAnimal = Math.random().toString(36).substring(2, 15); // Generación aleatoria de IdAnimal
+                this.name = name;
+                this.cageNumber = cageNumber;
+                this.IdTypeAnimal = IdTypeAnimal;
+                this.weight = weight;
+            }
+        }
+
+        // Creación de instancias de CZooAnimal
+let animal1 = new CZooAnimal("Tigre", 1, "felino", 100);
+let animal2 = new CZooAnimal("Leon", 2, "felino", 180);
+let animal3 = new CZooAnimal("Aguila", 3, "ave", 2);
+let animal4 = new CZooAnimal("Serpiente", 4, "reptil", 80);
+let animal5 = new CZooAnimal("Pantera", 5, "felino", 100);
+
+        // Creación del array zooAnimals y adición de instancias
+        let zooAnimals = [animal1, animal2, animal3, animal4, animal5];
+
+        // Función para contar animales en la jaula 5 con peso menor a 3 kg
+        function countAnimalsInCage5Under3kg(zooAnimals) {
+            return zooAnimals.filter(animal => animal.cageNumber === 5 && animal.weight < 3).length;
+        }
+
+        // Función para contar felinos en jaulas entre 2 y 5
+        function countFelineAnimalsBetweenCages2And5(zooAnimals) {
+            return zooAnimals.filter(animal => animal.IdTypeAnimal === "felino" && animal.cageNumber >= 2 && animal.cageNumber <= 5).length;
+        }
+
+        // Función para listar el nombre de un animal en la jaula 4 con peso menor a 120 kg
+        function listAnimalNameInCage4Under120(zooAnimals) {
+            let animal = zooAnimals.find(animal => animal.cageNumber === 4 && animal.weight < 120);
+            return animal ? animal.name : "No hay ningún animal que cumpla esas condiciones.";
+        }
+
+        // Ejecución de las funciones y salida de resultados en el HTML
+        document.getElementById("countCage5Under3kg").innerText = "Animales en la jaula 5 con peso menor a 3 kg: " + countAnimalsInCage5Under3kg(zooAnimals);
+        document.getElementById("countFelineCages2to5").innerText = "Felinos en jaulas entre 2 y 5: " + countFelineAnimalsBetweenCages2And5(zooAnimals);
+        document.getElementById("animalNameCage4Under120").innerText = "Nombre del animal en la jaula 4 con peso menor a 120 kg: " + listAnimalNameInCage4Under120(zooAnimals);
+    </script>
+</body>
+</html>
